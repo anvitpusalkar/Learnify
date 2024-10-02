@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Generation Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Course Generation Platform</h1>
+    </div>
+
+    <div class="container">
+        <div class="login-container">
+            <!-- Input for course topic -->
+            <input type="text" id="prompt-input" class="search-bar" placeholder="Enter your course topic...">
+            
+            <!-- Generate Course Button -->
+            <button class="login-btn" onclick="generateCourse()">Generate Course</button>
+        </div>
+
+        <!-- Container to display the course content -->
+        <div class="response-container">
+            <div id="course-content" class="course-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to generate course
+        async function generateCourse() {
+            const prompt = document.getElementById('prompt-input').value;
+
+            const response = await fetch('/generate-course', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+
+            const data = await response.json();
+            displayCourse(data.weeks);
+        }
+
+        // Function to display the weekly course with videos
+        function displayCourse(weeks) {
+            const courseContentContainer = document.getElementById('course-content');
+            courseContentContainer.innerHTML = '';  // Clear previous content
+
+            weeks.forEach(week => {
+                // Create a div for each week
+                const weekDiv = document.createElement('div');
+                weekDiv.className = 'week-section';
+
+                // Add week details
+                const weekTitle = document.createElement('h3');
+                weekTitle.innerText = week.week;
+                const weekDetails = document.createElement('p');
+                weekDetails.innerText = week.details;
+
+                // Append week title and details
+                weekDiv.appendChild(weekTitle);
+                weekDiv.appendChild(weekDetails);
+
+                // Add videos
+                const videoContainer = document.createElement('div');
+                videoContainer.className = 'video-container';
+
+                week.videos.forEach(video => {
+                    const videoDiv = document.createElement('div');
+                    videoDiv.className = 'video';
+
+                    const videoTitle = document.createElement('h4');
+                    videoTitle.innerText = video.title;
+
+                    const videoThumbnail = document.createElement('img');
+                    videoThumbnail.src = video.thumbnail;
+                    videoThumbnail.alt = video.title;
+
+                    const videoLink = document.createElement('a');
+                    videoLink.href = `https://www.youtube.com/watch?v=${video.videoId}`;
+                    videoLink.target = '_blank';
+                    videoLink.innerText = 'Watch Video';
+
+                    videoDiv.appendChild(videoTitle);
+                    videoDiv.appendChild(videoThumbnail);
+                    videoDiv.appendChild(videoLink);
+                    videoContainer.appendChild(videoDiv);
+                });
+
+                weekDiv.appendChild(videoContainer);
+                courseContentContainer.appendChild(weekDiv);
+            });
+        }
+    </script>
+</body>
+</html>
