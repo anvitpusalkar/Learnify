@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-white: 0 0% 100%;
+    --color-black: 0 0% 0%;
+    --color-gray-50: 210 40% 98%;
+    --color-gray-100: 220 14% 96%;
+    --color-gray-200: 220 13% 91%;
+    --color-gray-300: 216 12% 84%;
+    --color-gray-400: 218 11% 65%;
+    --color-gray-500: 220 9% 46%;
+    --color-gray-600: 215 14% 34%;
+    --color-gray-700: 217 19% 27%;
+    --color-gray-800: 215 28% 17%;
+    --color-gray-900: 221 39% 11%;
+    --color-blue-500: 217 91% 60%;
+    --color-blue-600: 221 83% 53%;
+    --color-blue-700: 224 76% 48%;
+    --color-red-500: 0 84% 60%;
+
+    --background: var(--color-white);
+    --foreground: var(--color-gray-900);
+    --heading: var(--color-black);
+    --starscolor: var(--color-gray-900);
+ 
+    --muted: var(--color-gray-100);
+    --muted-foreground: var(--color-gray-500);
+ 
+    --popover: var(--color-white);
+    --popover-foreground: var(--color-gray-900);
+ 
+    --card: var(--color-white);
+    --card-foreground: var(--color-gray-900);
+ 
+    --border: var(--color-gray-200);
+    --input: var(--color-gray-200);
+ 
+    --primary: var(--color-blue-600);
+    --primary-foreground: var(--color-white);
+    --flip-color: var(--color-blue-500);
+ 
+    --secondary: var(--color-gray-100);
+    --secondary-foreground: var(--color-gray-900);
+ 
+    --accent: var(--color-gray-100);
+    --accent-foreground: var(--color-gray-900);
+ 
+    --destructive: var(--color-red-500);
+    --destructive-foreground: var(--color-white);
+ 
+    --ring: var(--color-gray-300);
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: var(--color-gray-900);
+    --foreground: var(--color-gray-50);
+    --heading: var(--color-white);
+    --starscolor: var(--color-white);
+
+ 
+    --muted: var(--color-gray-800);
+    --muted-foreground: var(--color-gray-400);
+ 
+    --popover: var(--color-gray-900);
+    --popover-foreground: var(--color-gray-50);
+ 
+    --card: var(--color-gray-900);
+    --card-foreground: var(--color-gray-50);
+ 
+    --border: var(--color-gray-800);
+    --input: var(--color-gray-800);
+ 
+    --primary: var(--color-blue-500);
+    --primary-foreground: var(--color-gray-50);
+    --flip-color: var(--color-blue-500);
+
+ 
+    --secondary: var(--color-gray-800);
+    --secondary-foreground: var(--color-gray-50);
+ 
+    --accent: var(--color-gray-800);
+    --accent-foreground: var(--color-gray-50);
+ 
+    --destructive: var(--color-red-500);
+    --destructive-foreground: var(--color-gray-50);
+ 
+    --ring: var(--color-gray-800);
+  }
+  .text-flipcolor {
+    color: var(--flip-color);
+  }
+  .light{
+    
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
